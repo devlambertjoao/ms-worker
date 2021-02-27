@@ -8,36 +8,25 @@ import com.lambert.worker.dto.WorkerDTO;
 @Component
 public class WorkerMapper {
 
-	public WorkerDTO toDTO(WorkerEntity workerEntity) {
-		WorkerDTO workerDTO = new WorkerDTO();
-		workerDTO.setId(workerEntity.getId());
-		workerDTO.setCreatedAt(workerEntity.getCreatedAt());
-		workerDTO.setUpdatedAt(workerEntity.getUpdatedAt());
-		workerDTO.setName(workerEntity.getName());
-		workerDTO.setIncomePerHour(workerEntity.getIncomePerHour());
-		workerDTO.setBirthday(workerEntity.getBirthday());
-		workerDTO.setWorkedHours(workerEntity.getWorkedHours());
+	public WorkerDTO toDTO(WorkerEntity entity) {
+		WorkerDTO dto = new WorkerDTO();
+		dto.setId(entity.getId());
+		dto.setCreatedAt(entity.getCreatedAt());
+		dto.setUpdatedAt(entity.getUpdatedAt());
+		dto.setName(entity.getName());
+		dto.setIncomePerHour(entity.getIncomePerHour());
+		dto.setBirthday(entity.getBirthday());
+		dto.setWorkedHours(entity.getWorkedHours());
 		
-		return workerDTO;
+		return dto;
 	}
 	
-	public WorkerEntity mergeDTOIntoEntity(WorkerEntity workerEntity, WorkerDTO workerDTO) {
-		workerEntity.setName(workerDTO.getName());
-		workerEntity.setIncomePerHour(workerDTO.getIncomePerHour());
-		workerEntity.setBirthday(workerDTO.getBirthday());
-		workerEntity.setWorkedHours(workerDTO.getWorkedHours());
+	public WorkerEntity toEntity(WorkerEntity entity, WorkerDTO dto) {
+		entity.setName(dto.getName());
+		entity.setIncomePerHour(dto.getIncomePerHour());
+		entity.setBirthday(dto.getBirthday());
+		entity.setWorkedHours(dto.getWorkedHours());
 		
-		return workerEntity;
-	}
-	
-	public WorkerEntity toEntity(WorkerDTO workerDTO) {
-		WorkerEntity workerEntity = new WorkerEntity();
-		workerEntity.setId(workerDTO.getId());
-		workerEntity.setName(workerDTO.getName());
-		workerEntity.setIncomePerHour(workerDTO.getIncomePerHour());
-		workerEntity.setBirthday(workerDTO.getBirthday());
-		workerEntity.setWorkedHours(workerDTO.getWorkedHours());
-		
-		return workerEntity;
+		return entity;
 	}
 }
