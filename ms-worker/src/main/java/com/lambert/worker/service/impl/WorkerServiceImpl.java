@@ -7,8 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.lambert.worker.data.mssql.entity.WorkerEntity;
-import com.lambert.worker.data.mssql.repository.WorkerRepository;
+import com.lambert.worker.data.sql.entity.WorkerEntity;
+import com.lambert.worker.data.sql.repository.WorkerRepository;
 import com.lambert.worker.dto.WorkerDTO;
 import com.lambert.worker.exception.ResourceNotFoundException;
 import com.lambert.worker.mapper.WorkerMapper;

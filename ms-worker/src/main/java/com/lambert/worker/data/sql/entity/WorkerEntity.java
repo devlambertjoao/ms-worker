@@ -1,4 +1,4 @@
-package com.lambert.worker.data.mssql.entity;
+package com.lambert.worker.data.sql.entity;
 
 import java.util.Date;
 

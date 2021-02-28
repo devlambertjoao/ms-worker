@@ -2,7 +2,7 @@ package com.lambert.worker.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.lambert.worker.data.mssql.entity.WorkerEntity;
+import com.lambert.worker.data.sql.entity.WorkerEntity;
 import com.lambert.worker.dto.WorkerDTO;
 
 @Component

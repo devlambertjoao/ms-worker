@@ -1,10 +1,10 @@
-package com.lambert.worker;
+package com.lambert.payroll;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MsAuthApplicationTests {
+class MsPayrollApplicationTests {
 
 	@Test
 	void contextLoads() {
