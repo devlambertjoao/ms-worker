@@ -4,28 +4,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.lambert.payroll.dto.WorkerDTO;
 import com.lambert.payroll.exception.ResourceNotFoundException;
+import com.lambert.payroll.feignclient.WorkerFeignClient;
 import com.lambert.payroll.service.PayrollService;
 
 @Service
 public class PayrollServiceImpl implements PayrollService {
 
-	@Value("${ms-worker.host}")
-	private String workerHost;
-	
 	@Autowired
-	private RestTemplate restTemplate;
+	private WorkerFeignClient workerFeignClient;
 	
 	@Override
 	public WorkerDTO calculate(Long workerId) throws ResourceNotFoundException {
 		Map<String, String> uriVariables = new HashMap<>();
 		uriVariables.put("id", workerId.toString());
-		WorkerDTO worker = restTemplate.getForObject(workerHost + "/worker/{id}", WorkerDTO.class, uriVariables);
+		WorkerDTO worker = workerFeignClient.findOne(workerId).getBody();
 		if(worker == null) {
 			throw new ResourceNotFoundException("Worker not found!");
 		}
