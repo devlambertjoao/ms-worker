@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lambert.payroll.exception.ResourceNotFoundException;
 import com.lambert.payroll.service.PayrollService;
 
 @RestController
@@ -18,7 +19,7 @@ public class PayrollController {
 	private PayrollService payrollService;
 	
 	@GetMapping
-	public ResponseEntity<Object> calculate(@RequestParam("workedHours") Float workedHours, @RequestParam("incomePerHour") Float incomePerHour) {
-		return new ResponseEntity<>(payrollService.calculate(workedHours, incomePerHour), HttpStatus.OK);
+	public ResponseEntity<Object> calculate(@RequestParam("workerId") Long workerId) throws ResourceNotFoundException {
+		return new ResponseEntity<>(payrollService.calculate(workerId), HttpStatus.OK);
 	}
 }

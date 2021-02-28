@@ -38,9 +38,10 @@ public class WorkerServiceImpl implements WorkerService {
 	@Override
 	public void save(WorkerDTO workerDTO) throws ResourceNotFoundException {
 		WorkerEntity workerEntity = new WorkerEntity();
-		
-		if(workerDTO.getId() != null) {
-			workerEntity = workerRepository.findById(workerDTO.getId()).orElseThrow(() -> new ResourceNotFoundException("Worker not found"));
+
+		if (workerDTO.getId() != null) {
+			workerEntity = workerRepository.findById(workerDTO.getId())
+					.orElseThrow(() -> new ResourceNotFoundException("Worker not found"));
 		}
 		workerMapper.toEntity(workerEntity, workerDTO);
 		workerRepository.save(workerEntity);

@@ -14,4 +14,9 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<Object> handleException(Exception exception) {
 		return new ResponseEntity<>(new ErrorDTO(exception.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException exception) {
+		return new ResponseEntity<>(new ErrorDTO(exception.getMessages()), exception.getHttpStatus());
+	}
 }
