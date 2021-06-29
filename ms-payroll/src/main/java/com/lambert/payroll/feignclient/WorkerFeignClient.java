@@ -1,5 +1,6 @@
 package com.lambert.payroll.feignclient;
 
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.lambert.payroll.dto.WorkerDTO;
 
 @Component
-@FeignClient(name = "ms-worker", url = "localhost:8081/api", path="/worker")
+@FeignClient(name = "ms-worker", path="/worker")
+@RibbonClient(name = "ms-worker")
 public interface WorkerFeignClient {
 
 	@GetMapping(path = "{id}")
