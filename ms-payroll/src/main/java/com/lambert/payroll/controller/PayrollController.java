@@ -12,14 +12,18 @@ import com.lambert.payroll.exception.ResourceNotFoundException;
 import com.lambert.payroll.service.PayrollService;
 
 @RestController
-@RequestMapping(value="/payroll")
+@RequestMapping(value = "/payroll")
 public class PayrollController {
-	
+
 	@Autowired
 	private PayrollService payrollService;
-	
+
 	@GetMapping
 	public ResponseEntity<Object> calculate(@RequestParam("workerId") Long workerId) throws ResourceNotFoundException {
-		return new ResponseEntity<>(payrollService.calculate(workerId), HttpStatus.OK);
+		try {
+			return new ResponseEntity<>(payrollService.calculate(workerId), HttpStatus.OK);
+		} catch (ResourceNotFoundException rnfe) {
+			return new ResponseEntity<>("Worker not found", HttpStatus.NOT_FOUND);
+		}
 	}
 }
