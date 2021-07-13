@@ -25,13 +25,11 @@ public class PayrollServiceImpl implements PayrollService {
 	@CircuitBreaker(name = "ms-payroll", fallbackMethod = "calculateFallback")
 	@Override
 	public WorkerDTO calculate(Long workerId) throws ResourceNotFoundException {
-		Map<String, String> uriVariables = new HashMap<>();
-		uriVariables.put("id", workerId.toString());
 		WorkerDTO worker = workerFeignClient.findOne(workerId).getBody();
 		if (worker == null) {
 			throw new ResourceNotFoundException("Worker not found!");
 		}
-		final Float DISCOUNT_PERCENT = 0.2f;
+		final float DISCOUNT_PERCENT = 0.2f;
 		worker.setTotalIcome(worker.getWorkedHours() * worker.getIncomePerHour() * (1 - DISCOUNT_PERCENT));
 		return worker;
 	}
@@ -39,7 +37,7 @@ public class PayrollServiceImpl implements PayrollService {
 	@SuppressWarnings("unused")
 	private WorkerDTO calculateFallback(Exception ex) throws ResourceNotFoundException {
 		if (ex instanceof FeignException) {
-			throw new ResourceNotFoundException("Service unavaible!");
+			throw new ResourceNotFoundException("Service unavailable!");
 		}
 		return null;
 	}

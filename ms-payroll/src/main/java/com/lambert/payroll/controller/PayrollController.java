@@ -23,7 +23,7 @@ public class PayrollController {
 		try {
 			return new ResponseEntity<>(payrollService.calculate(workerId), HttpStatus.OK);
 		} catch (ResourceNotFoundException rnfe) {
-			return new ResponseEntity<>("Worker not found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(rnfe.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
 }
